@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pocket Battle — A Simple Pokémon Game</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game">
+    <header>
+      <h1>⚡ Pocket Battle</h1>
+      <p class="tagline">A tiny turn-based monster battler</p>
+    </header>
+
+    <!-- Starter selection -->
+    <section id="select-screen" class="screen active">
+      <h2>Choose your partner</h2>
+      <div id="starter-list" class="starter-list"></div>
+    </section>
+
+    <!-- Battle -->
+    <section id="battle-screen" class="screen">
+      <div class="arena">
+        <div class="combatant foe">
+          <div class="info">
+            <span class="name" id="foe-name"></span>
+            <span class="lvl" id="foe-lvl"></span>
+            <div class="hpbar"><div class="hpfill" id="foe-hpfill"></div></div>
+            <span class="hptext" id="foe-hptext"></span>
+          </div>
+          <div class="sprite" id="foe-sprite"></div>
+        </div>
+
+        <div class="combatant you">
+          <div class="sprite" id="you-sprite"></div>
+          <div class="info">
+            <span class="name" id="you-name"></span>
+            <span class="lvl" id="you-lvl"></span>
+            <div class="hpbar"><div class="hpfill" id="you-hpfill"></div></div>
+            <span class="hptext" id="you-hptext"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="log" id="log"></div>
+
+      <div class="controls" id="moves"></div>
+      <div class="controls secondary">
+        <button id="run-btn">Run</button>
+        <button id="next-btn" class="hidden">Find next foe ▶</button>
+      </div>
+    </section>
+
+    <footer>
+      <span id="record">Wins: 0 · Losses: 0</span>
+    </footer>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

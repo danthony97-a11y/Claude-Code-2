@@ -1,0 +1,171 @@
+:root {
+  --bg: #1b2030;
+  --panel: #252b40;
+  --panel-2: #2f3653;
+  --ink: #eef1f8;
+  --muted: #9aa3c0;
+  --accent: #ffcb05;   /* Pokémon yellow */
+  --accent-2: #3b6cff; /* Pokémon blue */
+  --hp-good: #3ad06a;
+  --hp-mid: #ffcb05;
+  --hp-low: #ff5a5a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+  background: radial-gradient(circle at 50% -10%, #2a3150, var(--bg));
+  color: var(--ink);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 16px;
+}
+
+#game {
+  width: 100%;
+  max-width: 540px;
+  background: var(--panel);
+  border: 3px solid var(--accent-2);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.45);
+}
+
+header { text-align: center; margin-bottom: 8px; }
+header h1 { margin: 0; color: var(--accent); letter-spacing: 1px; }
+.tagline { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+
+.screen { display: none; }
+.screen.active { display: block; }
+
+h2 { text-align: center; font-weight: 600; }
+
+/* Starter selection */
+.starter-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.starter-card {
+  background: var(--panel-2);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 14px 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform .12s, border-color .12s;
+}
+.starter-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+.starter-card .emoji { font-size: 44px; line-height: 1; }
+.starter-card .sname { font-weight: 700; margin-top: 6px; }
+.starter-card .stype { font-size: 12px; color: var(--muted); }
+
+/* Battle arena */
+.arena {
+  background: linear-gradient(160deg, #3a4d2e, #6f9d4e);
+  border-radius: 12px;
+  padding: 14px;
+  display: grid;
+  gap: 18px;
+}
+.combatant { display: flex; align-items: center; gap: 12px; }
+.combatant.foe { justify-content: flex-start; }
+.combatant.you { justify-content: flex-end; flex-direction: row; }
+
+.sprite { font-size: 64px; line-height: 1; filter: drop-shadow(0 4px 6px rgba(0,0,0,.4)); }
+.combatant.foe .sprite { transform: scaleX(-1); }
+
+.info {
+  background: rgba(0,0,0,.45);
+  border-radius: 10px;
+  padding: 8px 10px;
+  min-width: 180px;
+}
+.info .name { font-weight: 700; }
+.info .lvl { float: right; color: var(--accent); font-size: 13px; }
+.hpbar {
+  height: 10px;
+  background: #11151f;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 6px 0 2px;
+}
+.hpfill {
+  height: 100%;
+  width: 100%;
+  background: var(--hp-good);
+  transition: width .4s ease, background .4s;
+}
+.hptext { font-size: 12px; color: var(--muted); }
+
+/* Damage shake */
+.hit { animation: shake .35s; }
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+.combatant.foe .sprite.hit { animation: shake-flip .35s; }
+@keyframes shake-flip {
+  0%,100% { transform: scaleX(-1) translateX(0); }
+  25% { transform: scaleX(-1) translateX(-6px); }
+  75% { transform: scaleX(-1) translateX(6px); }
+}
+.fainted { opacity: .25; filter: grayscale(1); }
+
+/* Log */
+.log {
+  background: #11151f;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin: 12px 0;
+  height: 76px;
+  overflow-y: auto;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.log p { margin: 0 0 4px; }
+.log .sys { color: var(--accent); }
+
+/* Controls */
+.controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.controls.secondary { grid-template-columns: 1fr; margin-top: 8px; }
+button {
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--panel-2);
+  border: 2px solid var(--accent-2);
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background .12s, transform .08s;
+}
+button:hover:not(:disabled) { background: var(--accent-2); }
+button:active:not(:disabled) { transform: scale(.97); }
+button:disabled { opacity: .4; cursor: not-allowed; }
+button .mtype { display: block; font-size: 11px; color: var(--muted); font-weight: 400; }
+button:hover:not(:disabled) .mtype { color: #dfe5ff; }
+
+#run-btn { border-color: #ff5a5a; }
+#run-btn:hover { background: #ff5a5a; }
+#next-btn { border-color: var(--hp-good); }
+#next-btn:hover { background: var(--hp-good); color: #11151f; }
+
+.hidden { display: none; }
+
+footer {
+  text-align: center;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 13px;
+}
